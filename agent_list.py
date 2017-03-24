@@ -3,8 +3,8 @@
 #currently, simply returns all agent IP, Hostname and OS
 
 import json
-
-with open ('all_agents.json') as data_file:
+originalFile = raw_input("Please Enter JSON file name: ")
+with open (originalFile, "r") as data_file:
 	counter = 0
 	results = ""
 	data = json.load(data_file)
@@ -14,8 +14,9 @@ with open ('all_agents.json') as data_file:
 		agent_name = (data["agents"][counter]["name"])
 		counter += 1
 		results = results + "\n%s,%s,%s" % (agent_ip, agent_name, agent_os)
-print (results)
 
-newFile = open("all_agents.csv", "w")
+
+newFile = open(originalFile.replace('.json', '.csv'), "w")
 newFile.write(results)
+print ("%s has been saved into your current directory!" % (originalFile.replace('.json', '.csv'))) 
 newFile.close()
