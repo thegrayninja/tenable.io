@@ -1,6 +1,6 @@
 #github.com/thegrayninja
 #for use with: curl -H "X-ApiKeys: accessKey=; secretKey=" https://cloud.tenable.com/scanners/1/agents >> all_agents.json 
-#simply returns all agent IP, Hostname and OS
+#currently, simply returns all agent IP, Hostname and OS
 
 import json
 
@@ -9,9 +9,13 @@ with open ('all_agents.json') as data_file:
 	results = ""
 	data = json.load(data_file)
 	for i in (data["agents"]):
-		agent_ip = (data["agents"][x]["ip"])
-		agent_os = (data["agents"][x]["platform"])
-		agent_name = (data["agents"][x]["name"])
-		x += 1
-		msg = msg + "\n%s,%s,%s" % (agent_ip, agent_name, agent_os)
-print (msg)
+		agent_ip = (data["agents"][counter]["ip"])
+		agent_os = (data["agents"][counter]["platform"])
+		agent_name = (data["agents"][counter]["name"])
+		counter += 1
+		results = results + "\n%s,%s,%s" % (agent_ip, agent_name, agent_os)
+print (results)
+
+newFile = open("all_agents.csv", "w")
+newFile.write(results)
+newFile.close()
