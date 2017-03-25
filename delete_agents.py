@@ -13,14 +13,14 @@ tenable_header = {'X-ApiKeys':'accessKey=; secretKey='}
 def is_in(ipfilter, agentip, lastscanned, agentid):
 	if ipfilter in agentip:
 		if lastscanned == None:
-			currenttime = time.time()
+			currenttime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 			url = 'https://cloud.tenable.com/scanners/1/agents/%s' % (agentid)
 			stale_agents = requests.delete(url, headers=tenable_header)
-			newentry = ("%s was deleted at %s epoch time" %(agentip, currenttime))
+			newentry = ("%s was deleted at %s" %(agentip, currenttime))
 			newFile = open("tenable_deleted_assets.log", "a")
 			newFile.write("%s\n" % (newentry))
 			newFile.close()
-			print(newentry)
+			print(newentry)		
 			time.sleep(.3)
 
 			
