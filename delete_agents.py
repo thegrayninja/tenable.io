@@ -15,7 +15,7 @@ def is_in(ipfilter, agentip, lastscanned, agentid):
 		if lastscanned == None:
 			currenttime = time.time()
 			url = 'https://cloud.tenable.com/scanners/1/agents/%s' % (agentid)
-			stale_agents = requests.get(url, headers=tenable_header)
+			stale_agents = requests.delete(url, headers=tenable_header)
 			newentry = ("%s was deleted at %s epoch time" %(agentip, currenttime))
 			newFile = open("tenable_deleted_assets.log", "a")
 			newFile.write("%s\n" % (newentry))
