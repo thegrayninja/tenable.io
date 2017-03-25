@@ -11,7 +11,6 @@ tenable_header = {'X-ApiKeys':'accessKey=; secretKey='}
 
 
 def is_in(ipfilter, agentip, lastscanned, agentid):
-	currenttime = time.time()
 	if ipfilter in agentip:
 		if lastscanned == None:
 			currenttime = time.time()
