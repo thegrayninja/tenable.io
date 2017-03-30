@@ -7,7 +7,7 @@ import time
 
 
 tenable_header = {'X-ApiKeys':'accessKey=; secretKey='}
-
+deleted_count = 0
 
 
 def is_in(ipfilter, agentip, lastscanned, agentid):
@@ -22,6 +22,8 @@ def is_in(ipfilter, agentip, lastscanned, agentid):
 			newFile.close()
 			print(newentry)		
 			time.sleep(.3)
+			global deleted_count
+			deleted_count +=1
 
 			
 tempFile_data = requests.get('https://cloud.tenable.com/scanners/1/agents', headers=tenable_header)
@@ -44,5 +46,6 @@ with open (originalFile, "r") as data_file:
 		agent_id = (data["agents"][counter]["id"])
 		is_in("192.168.1.", agent_ip, agent_age, agent_id)
 		counter += 1
-		
+
+print(deleted_count)
 print("tenable_deleted_assets.log has been saved to your current directory")
