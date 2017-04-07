@@ -6,7 +6,7 @@ import time
 
 from auth_file import tenable_header
 
-search_list_prompt = raw_input("Need to input search ranges. Column formatted, no wildcards.\nPlease Enter File Name that: ")
+search_list_prompt = raw_input("Need to input search ranges. Column formatted, no wildcards.\nPlease Enter File Name: ")
 with open(search_list_prompt, "r") as SearchList:
 	import_search_strings=SearchList.readlines()
 SearchList.close()
