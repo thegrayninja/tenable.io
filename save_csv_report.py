@@ -12,8 +12,7 @@ report_id = raw_input("Enter Report ID: ")
 
 #status_url = 'https://cloud.tenable.com/scans/%s/export/%s/status' % (scan_id,report_id["file"])
 status_url = 'https://cloud.tenable.com/scans/%s/export/%s/status' % (scan_id,report_id)
-export_scan = requests.get(status_url, headers=(tenable_header))
-print(export_scan.content)
+
 #when ready, download the file and and save it to the input provided by the user +.tmp
 report_name_user = raw_input("Please enter name for report: ")
 report_name_user_temp = "%s.tmp" % (report_name_user)
@@ -21,6 +20,7 @@ report_name_user_temp = "%s.tmp" % (report_name_user)
 def download_report():
 	timer = 0
 	while 1 == 1:
+		export_scan = requests.get(status_url, headers=(tenable_header))
 		if export_scan.content == '{"status":"ready"}':
 			url = 'https://cloud.tenable.com/scans/%s/export/%s/download' % (scan_id,report_id)
 			download_report = requests.get(url, headers=tenable_header)
