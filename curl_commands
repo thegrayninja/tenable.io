@@ -1,0 +1,24 @@
+curl commnads
+
+
+working commands:
+
+#To grab scan data
+curl -k -X GET -H 'X-ApiKeys:accessKey=<>; secretKey=<>' https://cloud.tenable.com/scans
+
+
+#To get scanner and scanner-group IDs
+curl -k -X GET -H 'X-ApiKeys:accessKey=<>; secretKey=<>' https://cloud.tenable.com/scanners
+
+
+
+#To Grab a Scan Template UUID:
+
+curl -k -X GET -H 'X-ApiKeys:accessKey=<>; secretKey=<>' https://cloud.tenable.com/editor/policy/templates
+
+
+
+#To Create a host-Discovery Scan (based on uuid):
+
+curl -k -X POST -H 'X-ApiKeys:accessKey=<>; secretKey=<>' -H 'Content-Type: application/json' -d '{"uuid": "scan_template_uuid", "settings": {"name": "Test Scan", "description": "Scan Description", "text_targets": "10.10.10.0/24", "scanner_id":1}' https://cloud.tenable.com/scans
+ 
