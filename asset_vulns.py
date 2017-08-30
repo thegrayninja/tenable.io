@@ -16,6 +16,7 @@ from auth_file import tenable_header
 #GetFileName()
 #DownloadAssetVulns()
 #VulnsToCSV()
+#SaveToFile()
 #
 
 
@@ -37,6 +38,7 @@ def VulnsToCSV(AllAssetHostnames, AssetResultsInJson):
 
 	data = AssetResultsInJson
 
+	#converting response codes to english
 	for i in (data["vulnerabilities"]):
 		vuln_severity = (data["vulnerabilities"][counter]["severity"])
 		vuln_name = (data["vulnerabilities"][counter]["plugin_name"])
@@ -57,6 +59,13 @@ def VulnsToCSV(AllAssetHostnames, AssetResultsInJson):
 
 
 
+def SaveToFile(DataToSave):
+	SaveFileName = raw_input("Please Enter the Filename to Save (example: MyReport.csv): ")
+	SaveToFile = open(SaveFileName, "w")
+	SaveToFile.write(DataToSave)
+	SaveToFile.close()
+	print("....\n....\ndone\n....\n....")
+
 
 
 def DownloadAssetVulns(AllAssetHostnames):
@@ -75,16 +84,9 @@ def DownloadAssetVulns(AllAssetHostnames):
 		NewResults += VulnsToCSV(hostname, ResultsInJson)
 		print("....")
 		
-
-	#this is the csv containing all asset vulns
-	temp_final_csv = open("my_new_awesome_file.csv", "w")
-	temp_final_csv.write(NewResults)
-	temp_final_csv.close()
-	print("....\n....\ndone\n....\n....")
+	SaveToFile(NewResults)
 
 	return 0
-
-
 
 
 
